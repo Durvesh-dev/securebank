@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecureBank – Online Banking</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">SecureBank</div>
+  <div id="session" hidden><span id="who"></span> <span class="pill" id="role"></span> <button class="ghost" id="logout">Sign out</button></div>
+</header>
+
+<main>
+  <section id="loginView" class="card narrow">
+    <h1>Sign in to Internet Banking</h1>
+    <form id="loginForm" novalidate>
+      <label for="username">Username</label>
+      <input id="username" autocomplete="username" maxlength="20" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" maxlength="64" required>
+      <button type="submit">Sign in</button>
+      <p class="msg err" id="loginMsg" role="alert"></p>
+    </form>
+    <p class="hint">Demo users: asha / Asha@2026 · rohan / Rohan@2026 · admin / Admin#2026</p>
+  </section>
+
+  <section id="customerView" hidden>
+    <div class="grid">
+      <div class="card">
+        <h2>Account summary</h2>
+        <p class="hint">Savings account <span id="acc"></span></p>
+        <p class="balance" id="balance"></p>
+        <h3>Recent transactions</h3>
+        <div class="scroll"><table><thead><tr><th>Date</th><th>Description</th><th class="num">Amount (₹)</th></tr></thead><tbody id="tx"></tbody></table></div>
+      </div>
+      <div class="card">
+        <h2>Fund transfer</h2>
+        <form id="transferForm" novalidate>
+          <label for="toAccount">Beneficiary account number</label>
+          <input id="toAccount" inputmode="numeric" maxlength="12" placeholder="12 digits">
+          <label for="ifsc">IFSC code</label>
+          <input id="ifsc" maxlength="11" placeholder="SBKD0001234">
+          <label for="amount">Amount (₹)</label>
+          <input id="amount" inputmode="decimal" placeholder="1 – 50000">
+          <label for="remark">Remark (optional)</label>
+          <input id="remark" maxlength="40">
+          <button type="submit">Transfer</button>
+          <p class="msg" id="transferMsg" role="status"></p>
+        </form>
+        <p class="hint">Test beneficiaries: Asha 501234567890 · Rohan 509876543210</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="adminView" hidden>
+    <div class="card">
+      <h2>Users</h2>
+      <div class="scroll"><table><thead><tr><th>Username</th><th>Role</th><th>Account</th><th>Locked</th><th>Password hash (bcrypt)</th></tr></thead><tbody id="users"></tbody></table></div>
+    </div>
+    <div class="card">
+      <h2>Security audit log <span class="pill" id="integrity"></span></h2>
+      <div class="scroll"><table><thead><tr><th>Time</th><th>Level</th><th>Event</th><th>User</th><th>IP</th></tr></thead><tbody id="audit"></tbody></table></div>
+      <button class="ghost" id="refreshAudit">Refresh</button>
+    </div>
+  </section>
+</main>
+<footer>SecureBank is a demonstration project for Web Application &amp; Security coursework. All data is fictional.</footer>
+<script src="/app.js"></script>
+</body>
+</html>
